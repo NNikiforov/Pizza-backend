@@ -12,4 +12,6 @@ script:
     mvn test -B
 
 after_success:
-  - sh .travis/deploy_dockerhub.sh
+  docker login -u $DOCKER_USER -p $DOCKER_PASS
+  docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$Pizz .
+  docker push $TRAVIS_REPO_SLUG
