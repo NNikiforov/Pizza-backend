@@ -1,0 +1,17 @@
+sudo: required
+
+services:
+  - docker
+  
+language: java
+
+before_install:
+    - chmod +x mvnw
+
+script:
+    mvn test -B
+
+after_success:
+  - sh .travis/deploy_dockerhub.sh
+  - sh .travis/deploy_heroku.sh
+  
